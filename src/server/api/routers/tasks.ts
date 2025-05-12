@@ -1,6 +1,6 @@
 
 // Este arquivo implementa um endpoint paginado (cursor-based) para suportar o infinite scroll na listagem de tarefas.
-// O comportamento de carregamento incremental pode ser testado na interface: ao rolar até o final da lista, novas tarefas são carregadas automaticamente, sem necessidade de recarregar a página.
+// O comportamento de carregamento incremental pode ser testado na interface: ao rolar até o final da lista, novas tarefas são carregadas automaticamente, sem necessidade de recarregar a página, para isso crie varias tarefas.
 
 
 import { z } from "zod";
@@ -14,8 +14,8 @@ type Task = {
   createdAt: string;
 };
 
-// Array em memória para simulação
-const tasks: Task[] = [];
+
+export const tasks: Task[] = [];
 
 const createTaskInput = z.object({
   title: z.string().min(1, "Title is required"),

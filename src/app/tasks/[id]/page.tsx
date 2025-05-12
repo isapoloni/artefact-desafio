@@ -1,8 +1,5 @@
 'use client';
 
-// Página de edição de tarefa. Busca a tarefa pelo id via trpc.tasks.list.
-// Em produção, o ideal seria um endpoint específico para buscar uma única tarefa.
-
 import TasksForm from '@/components/TasksForm';
 import { trpc } from '@/lib/trpc/client';
 import { useParams } from 'next/navigation';
