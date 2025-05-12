@@ -3,6 +3,7 @@
 import { trpc } from '@/lib/trpc/client';
 import TaskItem from '@/components/TaskItem';
 import { useRef, useEffect, useCallback } from 'react';
+import { toast } from 'sonner';
 
 type Task = {
     id: string;
@@ -52,6 +53,7 @@ export default function TaskListClient({ initialData }: TaskListProps) {
                     })),
                 };
             });
+            toast.success("Tarefa excluída com sucesso!");
         },
     });
 
