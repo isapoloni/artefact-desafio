@@ -1,36 +1,131 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ✅ Desafio - Gerenciador de Tarefas (Next.js + tRPC)
 
-## Getting Started
+Este projeto foi desenvolvido como parte de um desafio técnico com foco em **Next.js 15**, **tRPC**, **React** e **TypeScript**. A aplicação simula um sistema simples de gerenciamento de tarefas, com operações completas de **CRUD**, SSR e feedback visual.
 
-First, run the development server:
+---
+
+## 🚀 Tecnologias Utilizadas
+
+- **Next.js 15 (App Router)**
+- **React 18**
+- **TypeScript**
+- **tRPC**
+- **Tailwind CSS**
+- **Zod**
+- **Lucide React Icons**
+
+---
+
+## 📦 Como Rodar o Projeto
+
+### ✅ Requisitos
+
+- Node.js na versão **v20.19.0**
+- npm
+
+### ▶️ Passos para executar:
+
+1. **Clone o repositório:**
+
+```bash
+git clone https://github.com/isapoloni/artefact-desafio
+```
+
+2. **Instale as dependências:**
+
+```bash
+npm install
+```
+
+3. **Execute o projeto localmente:**
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+4. Acesse no navegador: [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## ✨ Funcionalidades
 
-## Learn More
+- [x] Listagem de tarefas com SSR  
+- [x] Criação de nova tarefa via formulário  
+- [x] Edição de tarefas existentes  
+- [x] Exclusão com confirmação e feedback  
+- [x] Validação de formulário
+- [x] Tratamento de erros do backend via tRPC  
+- [x] Scroll infinito na listagem (bônus)  
+- [x] Feedback visual (loading, sucesso, erro)
 
-To learn more about Next.js, take a look at the following resources:
+## 📄 Estrutura da Tarefa
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Cada tarefa é representada por um objeto com os seguintes campos:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```ts
+type Task = {
+  id: string; // Identificador único (UUID)
+  title: string; // Título da tarefa (obrigatório)
+  description?: string; // Descrição (opcional)
+  createdAt: string; // Data de criação em ISO string
+}
+```
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🔌 Backend com tRPC
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+A camada de API foi implementada com **tRPC** e mantém os dados das tarefas em memória (sem banco de dados). Ela oferece os seguintes endpoints:
+
+### 🔄 CRUD
+
+- **`create`**: Cria uma nova tarefa (validação com Zod, exige título)
+- **`list`**: Lista todas as tarefas (sem paginação)
+- **`update`**: Atualiza uma tarefa existente
+- **`delete`**: Remove uma tarefa pelo ID
+
+### ♾️ Paginação com Cursor (Scroll Infinito)
+
+- **`infiniteList`**: Retorna tarefas com paginação baseada em cursor, ideal para scroll infinito
+  - Parâmetros:
+    - `limit`: número de tarefas por página (padrão: 10)
+    - `cursor`: ID da última tarefa carregada (opcional)
+  - Retorna:
+    - `items`: array de tarefas da página atual
+    - `nextCursor`: ID da próxima tarefa a ser usada como cursor
+
+Todos os endpoints estão validados com **Zod** e fornecem mensagens de erro detalhadas via `TRPCError`.
+
+---
+
+## 💡 Experiência do Usuário
+
+- Estado de carregamento em todas as requisições assíncronas
+- Mensagens de erro amigáveis para falhas comuns
+- Confirmações visuais para ações de sucesso (como exclusão ou criação)
+
+---
+
+## 🧪 Testes & Bônus
+
+- [x] Implementado scroll infinito para carregamento dinâmico de tarefas  
+- [x] Código comentado e documentado para melhor entendimento
+
+---
+## ⚠️ Observação
+
+Este projeto é **volátil**: os dados das tarefas são mantidos apenas em memória (RAM). Ao reiniciar o servidor, todos os dados serão perdidos, já que não há persistência em banco de dados.
+
+---
+
+## 🧠 Contato
+
+Se quiser bater um papo técnico ou tirar dúvidas:
+
+**Isabella Poloni**  
+📧 isabella Poloni  
+💼 [LinkedIn](https://www.linkedin.com/in/isabella-poloni/)
+
+---
+
+Obrigado por conferir este projeto! Espero que ele reflita boas práticas, foco em DX/UX e arquitetura moderna com Next.js! 🚀🧠
